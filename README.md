@@ -2,25 +2,13 @@
 
 这个是使用Vite和Vue 3进行开发的医院前台信息网站。
 
-## 项目设置
+## 添加项目包
 
 ```sh
 npm install
 ```
 
-### 编译使项目运行起来
-
-```sh
-npm run dev
-```
-
-### 完成了可对代码进行打包
-
-```sh
-npm run build
-```
-
-### 除此之外还需要加入一些插件elementplus
+### 在运行项目前还需要加入一些插件，例如elementplus
 
 ```sh
 npm install element-plus --save
@@ -36,4 +24,16 @@ npm install @element-plus/icons-vue
 
 ```sh
 npm install laf-client-sdk
+```
+
+### 编译项目运行
+
+```sh
+npm run dev
+```
+
+### 完成了可对代码进行打包
+
+```sh
+npm run build
 ```
