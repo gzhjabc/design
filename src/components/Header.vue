@@ -3,7 +3,7 @@
     <div class="nav-wrap">
       <div class="l">
         <h1>
-          <img src="../assets/logo.svg" alt="" />
+          <img src="../assets/hospitallogo.png" alt="" />
         </h1>
       </div>
       <div class="c">
@@ -70,7 +70,8 @@ export default {
   align-items: center;
 
   .l img{
-    width: 180px;
+    margin: 0 60px;
+    width: 50px;
     height: 50px;
   }
   .c ul {

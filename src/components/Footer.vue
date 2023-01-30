@@ -2,8 +2,8 @@
     <div class="footer-b">
       <div class="heart ">
         <div class="footer-i">
-          <h2>
-            <a href=""><img src="../assets/logo.svg" alt="" width="250" height="50" /></a>
+          <h2 style="display:flex;justify-content: center;">
+            <a href=""><img src="../assets/hospitallogo.png" alt="" width="60" height="60" /></a>
           </h2>
           <p style="line-height: 1.6em">
             广东省人民医院将始终坚持以习近平新时代中国特色社会主义思想为指导，深入贯彻落实党中央决策部署及省委工作安排，按照广东省卫生健康委工作要求，与时俱进深化“1+1+9”工作部署，以国际视野、战略高度、前瞻性规划和脚踏实地的精神，不断推进高水平医院建设，为争创全国卫生健康高质量发展示范省、建设健康中国贡献智慧和力量！
