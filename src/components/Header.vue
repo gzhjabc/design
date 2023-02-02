@@ -47,7 +47,7 @@ export default {
   //   this.$router.path = '/home'
   // },
 
-  // 由于element的菜单有路由跳转功能所以 method的路径跳转方法不用了
+  // 由于element的菜单有路由跳转功能所以 methods的路径跳转方法不用了
   // methods:{
     // toPage(url) {
     //   console.log(url);
