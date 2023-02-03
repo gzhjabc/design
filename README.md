@@ -37,3 +37,28 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### 打包补充：输入打包命令会生成dist目录，由于直接打开里面的index.html文件会是空白，所以我找到网上推荐的安装插件
+### 这里推荐 live-server 或 http-server，因为它们在安装和使用上都非常的方便，只需要在命令行工具中，执行命令就搞定了
+
+```sh
+npm install -g live-server
+```
+
+### 或者
+
+```sh
+npm install -g http-server
+```
+
+### 启动服务，安装完后用命令提示符在生成的dist目录下输入
+
+```sh
+live-server
+```
+
+### 或者
+
+```sh
+http-server
+```
