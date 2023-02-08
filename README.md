@@ -20,6 +20,12 @@ npm install element-plus --save
 npm install @element-plus/icons-vue
 ```
 
+### less插件
+
+```sh
+npm install less
+```
+
 ### 最后我还加入了laf云开发的插件来获取后台的数据，地址用的我自己的
 
 ```sh
