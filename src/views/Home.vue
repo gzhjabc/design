@@ -43,9 +43,7 @@
             </div>
             <el-collapse v-for="notices in notice" :key="notices._id" v-model="activeName" accordion>
             <el-collapse-item :title="notices.title" name="1">
-                <div>
-                {{ notices.content }}
-                </div>
+                <div v-html="notices.content" style="text-indent:20px"></div>
             </el-collapse-item>
             </el-collapse>
             </div>

@@ -28,8 +28,7 @@ export default {
     data() {
     return {
         article: [],
-        id: 0,
-        hit: 0
+        id: 0
     }
   },
   created () {
@@ -45,17 +44,17 @@ export default {
         
             this.id = this.article._id;
             console.log(id);
-            let hit = this.hit
             let res = await cloud.database().collection('article').doc(id).get()
             this.article = res.data
             console.log(res)
             // 增加阅读量
-            this.hit = this.article.hit + 1;
-            // let res2 = await cloud.database().collection('article').doc(id).update({
-            //     hit: this.hit
-            // })
+            this.article.hit = res.data.hit + 1
+            // 更新数据
+            let res2 = await cloud.database().collection('article').doc(id).update({
+                hit: this.article.hit
+            })
+            console.log(res2)
         },
-        // 阅读量ze
     }
 }
 </script>
