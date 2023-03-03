@@ -69,13 +69,24 @@ export default {
   // justify-content: space-between;
   align-items: center;
 
-  .l img{
+  .l {
+    width: 10%;
+    h1 {
+      display: flex;
+      justify-content: center;
+    }
+    img{
     margin: 0 60px;
     width: 50px;
     height: 50px;
   }
-  .c ul {
-    width: 1000px;
+  }
+  
+  
+  .c {
+    width: 80%;
+   ul {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     font-size: 18px;
@@ -86,7 +97,9 @@ export default {
       font-weight: bold;
     }
     
+  } 
   }
+   
   // .r {
   //   display: flex;
   //   input {

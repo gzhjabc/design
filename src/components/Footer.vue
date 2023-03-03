@@ -1,6 +1,6 @@
 <template>
     <div class="footer-b">
-      <div class="heart ">
+      <div class="heart">
         <div class="footer-i">
           <h2 style="display:flex;justify-content: center;">
             <a href=""><img src="../assets/hospitallogo.png" alt="" width="60" height="60" /></a>
@@ -9,7 +9,8 @@
             广东省人民医院将始终坚持以习近平新时代中国特色社会主义思想为指导，深入贯彻落实党中央决策部署及省委工作安排，按照广东省卫生健康委工作要求，与时俱进深化“1+1+9”工作部署，以国际视野、战略高度、前瞻性规划和脚踏实地的精神，不断推进高水平医院建设，为争创全国卫生健康高质量发展示范省、建设健康中国贡献智慧和力量！
           </p>
         </div>
-        <el-card shadow="hover" class="links" body-style="display:flex;flex-direction: column;">
+        <div class="footer-m">
+          <el-card shadow="hover" class="links" body-style="display:flex;flex-direction: column;">
           <p>友情链接</p>
           <div>
             <div v-for="link in links" :key="link._id">
@@ -18,17 +19,7 @@
           </div>
           </div>
         </el-card>
-        <!-- <ul>
-          <li>
-            <img src="../assets/img/wx.5584e874.png" alt="" />
-            <a href="javascript:;">微信公众号</a>
-          </li>
-          <li><a href="javascript:;">新浪微博</a></li>
-          <li>
-            <img src="../assets/img/service.848ec511.png" alt="" />
-            <a href="javascript:;">在线客服</a>
-          </li>
-        </ul> -->
+        </div>
         <div class="footer-r">
           <p>主办单位：广东省人民医院 (粤ICP备14099214号)</p>
           <p>地址：广州市中山二路106号</p>
@@ -81,7 +72,8 @@
   .footer-b {
     width: 100%;
     /* margin-top: 20px; */
-    height: 300px;
+    // height: 300px;
+    padding: 20px;
     background:  #337ecc;
     display: flex;
     justify-content: center;

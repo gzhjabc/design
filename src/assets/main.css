@@ -6,8 +6,12 @@
   list-style: none;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 #app {
-  width: 100%;
+  min-width: 100%;
   margin: 0 auto;
   /* padding: 2rem 0; */
 
