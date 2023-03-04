@@ -26,6 +26,12 @@ npm install @element-plus/icons-vue
 npm install less
 ```
 
+### md5加密
+
+```sh
+npm install --save js-md5
+```
+
 ### 最后我还加入了laf云开发的插件来获取后台的数据，地址用的我自己的
 
 ```sh
