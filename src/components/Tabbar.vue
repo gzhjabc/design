@@ -4,11 +4,18 @@
             <div class="l">
                 欢迎来到人民医院
             </div>
+            <div>
+                <router-link to="/reserve">
+                <el-button type="primary">
+                    前往预约
+                </el-button>
+            </router-link>
             <a link rel="stylesheet" href="http://localhost:2800" class="r">
                 <el-button type="primary">
                     前往后台登录
                 </el-button>
             </a>
+            </div>
         </div>
     </div>
 </template>
@@ -43,7 +50,7 @@
             }
 
             .r {
-                margin-right: 40px;
+                margin: 0 40px;
             }
         }
     }
