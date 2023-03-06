@@ -1,5 +1,5 @@
 <template>
-    <div class="nav">
+  <div class="nav">
     <div class="nav-wrap">
       <div class="l">
         <h1>
@@ -7,13 +7,8 @@
         </h1>
       </div>
       <div class="c">
-        <el-menu
-    :default-active="$route.path"
-    router="true"
-    class="el-menu-demo"
-    mode="horizontal"
-    @select="handleSelect"
-  >
+        <el-menu :default-active="$route.path" router="true" class="el-menu-demo" mode="horizontal"
+          @select="handleSelect">
           <!-- 点击的时候，路由跳转 -->
           <!-- 动态添加样式 当前项的效果 -->
           <!-- 判断条件 ：当前路径是/home 就首页这个li加active -->
@@ -49,21 +44,21 @@ export default {
 
   // 由于element的菜单有路由跳转功能所以 methods的路径跳转方法不用了
   // methods:{
-    // toPage(url) {
-    //   console.log(url);
-      // 作用路径跳转
-      // this.$router.push(路径)
-      // this.$router.push(url)
-      // 只要使用了push方法就要一定写catch(err=>{})
-      // this.$router.push(url).catch(err=>{})
-    // },
-    
+  // toPage(url) {
+  //   console.log(url);
+  // 作用路径跳转
+  // this.$router.push(路径)
+  // this.$router.push(url)
+  // 只要使用了push方法就要一定写catch(err=>{})
+  // this.$router.push(url).catch(err=>{})
+  // },
+
   // }
 }
 </script>
 
 <style lang="less" scoped>
-    .nav-wrap {
+.nav-wrap {
   height: 118px;
   display: flex;
   // justify-content: space-between;
@@ -71,35 +66,39 @@ export default {
 
   .l {
     width: 10%;
+
     h1 {
       display: flex;
       justify-content: center;
     }
-    img{
-    margin: 0 60px;
-    width: 50px;
-    height: 50px;
+
+    img {
+      margin: 0 60px;
+      width: 50px;
+      height: 50px;
+    }
   }
-  }
-  
-  
+
+
   .c {
     width: 80%;
-   ul {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    li{
-      // width: 200px;
-      padding: 10px 55px;
-      font-size: 20px;
-      font-weight: bold;
+
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+
+      li {
+        // width: 200px;
+        padding: 10px 55px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
     }
-    
-  } 
   }
-   
+
   // .r {
   //   display: flex;
   //   input {

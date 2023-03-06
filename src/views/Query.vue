@@ -46,13 +46,16 @@
     export default {
         data() {
             return {
+				// 步骤数
                 stepActive: 0,
+				// 要查询的信息
                 reserve: [],
-				id: 0,
+				// 登录信息
                 login: {
                     username: "",
                     password: ""
 			    },
+				// 验证规则
                 rules: {
                     username: [
 						{ required: true, message: '请输入账号名', trigger: 'blur'}
@@ -64,6 +67,7 @@
             }
         },
         methods: {
+			// 提交方法
             async save(){
 				const formName = `stepForm_${this.stepActive}`
 				
@@ -76,6 +80,7 @@
 					password: md5(this.login.password)
 				}
 
+				// 登录
 				var admin = await cloud.invoke('login-user', data)
 					if(admin.code == 200){
 						this.stepActive = 1;
@@ -93,15 +98,18 @@
 						this.$message.warning(admin.message)
 					}
 			},
+			// 返回首页
 			goIndex(){
 				this.$router.push({
 					path: '/home'
 				})
 			}
         },
+		// 离开路由之前删除本地存储
 		beforeRouteLeave() {
 			localStorage.removeItem("postId")
 		},
+		// 同理
 		beforeCreate() {
 			localStorage.removeItem("postId")
 		}
