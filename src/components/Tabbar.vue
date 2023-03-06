@@ -4,20 +4,26 @@
             <div class="l">
                 欢迎来到人民医院
             </div>
-            <div>
-                <router-link to="/reserve">
-                <el-button type="primary">
-                    前往预约
-                </el-button>
-            </router-link>
-            <a link rel="stylesheet" href="http://localhost:2800" class="r">
-                <el-button type="primary">
-                    前往后台登录
-                </el-button>
-            </a>
+                <div class="r">
+                    <router-link to="/query">
+                        <el-button type="primary">
+                            前往查询
+                        </el-button>
+                    </router-link>
+                    <router-link to="/reserve">
+                        <el-button type="primary">
+                            前往预约
+                        </el-button>
+                    </router-link>
+                    
+                    <a link rel="stylesheet" href="http://localhost:2800">
+                        <el-button type="primary">
+                            前往后台登录
+                        </el-button>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -50,7 +56,9 @@
             }
 
             .r {
-                margin: 0 40px;
+                display: flex;
+                justify-content: space-around;
+                width: 30%;
             }
         }
     }

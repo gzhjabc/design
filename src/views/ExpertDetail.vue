@@ -2,7 +2,7 @@
     <div class="expertdetail">
         <el-row :gutter="20">
             <el-col
-            v-for="(o, index) in 1"
+            v-for="(o) in 1"
             :key="o"
             :span="24"
             

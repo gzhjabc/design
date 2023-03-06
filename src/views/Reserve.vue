@@ -34,7 +34,7 @@
 				<div class="el-form-item-msg">根据自己的疾病选择对于对应的科室</div>
 			</el-form-item>
 			<el-form-item label="日期选择" prop="date">
-				<el-date-picker type="date" placeholder="选择日期" v-model="form.date"></el-date-picker>
+				<el-date-picker type="date" value-format="YYYY-MM-DD" placeholder="选择日期" v-model="form.date"></el-date-picker>
 				<div class="el-form-item-msg">合适的时间可以让医生安排好诊断时间</div>
 			</el-form-item>
             <el-form-item label="联系方式" prop="phone">
@@ -111,17 +111,23 @@
         }
     },
 	async created() {
-				console.log(cloud)
+			console.log(cloud)
 
-				let db = cloud.database()
+			let db = cloud.database()
 
-				let collection = db.collection('section')
+			let collection = db.collection('section')
 
-				let section = await collection.get()
-				console.log(section)
-				this.section = section.data
-	},
-	methods: {
+			let section = await collection.get()
+			console.log(section)
+			this.section = section.data
+		},
+		beforeRouteLeave() {
+			localStorage.removeItem("postId")
+		},
+		beforeCreate() {
+			localStorage.removeItem("postId")
+		},
+		methods: {
 			pre(){
 				this.stepActive -= 1
 			},
@@ -139,7 +145,8 @@
 
 				var admin = await cloud.invoke('login-user', data)
 					if(admin.code == 200){
-						this.stepActive += 1
+						this.stepActive += 1;
+						localStorage.setItem("postId",admin.data.userInfo.userId)
 					}else{
 						this.$message.warning(admin.message)
 					}
@@ -157,7 +164,8 @@
 					section: this.form.section,
 					date: this.form.date,
 					phone: this.form.phone,
-					desc: this.form.desc
+					desc: this.form.desc,
+					postid: localStorage.getItem("postId")
 				}
 
 				let user = await cloud.invoke('reserve', data)

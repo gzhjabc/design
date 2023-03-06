@@ -27,7 +27,7 @@
         </el-row>
         <el-pagination
             :current-page="currentPage"
-            v-model:page-size="pageSize"
+            v-model="pageSize"
             :page-sizes="[4, 8, 12, 16]"
             background
             layout="total, sizes, prev, pager, next, jumper"

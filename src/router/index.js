@@ -53,6 +53,11 @@ const router = createRouter({
       path: '/reserve',
       component: ()=>import ("../views/Reserve.vue")
     },
+    {
+      // 配置路由规则 路径和组件的对应
+      path: '/query',
+      component: ()=>import ("../views/Query.vue")
+    },
     // {
     //   path: '/about',
     //   name: 'about',
