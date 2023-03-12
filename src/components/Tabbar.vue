@@ -16,7 +16,7 @@
                     </el-button>
                 </router-link>
 
-                <a link rel="stylesheet" href="http://localhost:2800">
+                <a link rel="stylesheet" href="https://e5i8o0-scui.site.laf.dev/#/">
                     <el-button type="primary">
                         前往后台登录
                     </el-button>
