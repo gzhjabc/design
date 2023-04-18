@@ -7,7 +7,7 @@
             <h3>专家列表</h3>
         </div>
         <el-row :gutter="20">
-            <el-col v-for="experts in expert.slice((currentPage - 1) * pageSize, currentPage * pageSize)" :key="experts._id"
+            <el-col :xs="12" :sm="12" :md="12" :lg="6" v-for="experts in expert.slice((currentPage - 1) * pageSize, currentPage * pageSize)" :key="experts._id"
                 :span="6" @click=goToDetail(experts._id)>
                 <el-card :body-style="{ padding: '10px' }">
                     <img :src="experts.img" class="image" />

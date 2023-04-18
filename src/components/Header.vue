@@ -1,14 +1,13 @@
 <template>
   <div class="nav">
     <div class="nav-wrap">
-      <div class="l">
+      <div class="l hidden-xs-only">
         <h1>
           <img src="../assets/hospitallogo.png" alt="" />
         </h1>
       </div>
-      <div class="c">
-        <el-menu :default-active="$route.path" router="true" class="el-menu-demo" mode="horizontal"
-          @select="handleSelect">
+      <div class="c hidden-xs-only">
+        <el-menu :default-active="$route.path" router="true" mode="horizontal" @select="handleSelect">
           <!-- 点击的时候，路由跳转 -->
           <!-- 动态添加样式 当前项的效果 -->
           <!-- 判断条件 ：当前路径是/home 就首页这个li加active -->
@@ -21,12 +20,26 @@
           <el-menu-item index="/article">文章</el-menu-item>
         </el-menu>
       </div>
-      <!-- <div class="r">
-        <input type="text" placeholder="请输入" />
-        <span class="search-btn"
-          ><img src="../assets/img/search.png" alt=""
-        /></span>
-      </div> -->
+      <el-row class="r hidden-sm-and-up" justify="center">
+        <el-col :xs="20">
+          <el-menu :default-active="$route.path" router="true" @open="handleOpen" @close="handleClose">
+            <el-sub-menu index="/home">
+              <template #title>
+                <el-icon>
+                  <Menu />
+                </el-icon>
+                <span>菜单</span>
+              </template>
+                <el-menu-item index="/home">首页</el-menu-item>
+                <el-menu-item index="/section">科室</el-menu-item>
+                <el-menu-item index="/disease">疾病</el-menu-item>
+                <el-menu-item index="/expert">专家</el-menu-item>
+                <el-menu-item index="/technique">技术</el-menu-item>
+                <el-menu-item index="/article">文章</el-menu-item>
+            </el-sub-menu>
+          </el-menu>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -38,6 +51,14 @@ export default {
     return {
     };
   },
+  methods: {
+    handleOpen(index, indexPath) {
+      console.log(index, indexPath);
+    },
+    handleClose(index, indexPath) {
+      console.log(index, indexPath);
+    }
+  }
   // created () {
   //   this.$router.path = '/home'
   // },
@@ -58,67 +79,65 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.nav-wrap {
-  height: 118px;
-  display: flex;
-  // justify-content: space-between;
-  align-items: center;
+.nav {
+  padding: 2% 0;
+  .nav-wrap {
+    // height: 118px;
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
 
-  .l {
-    width: 10%;
+    .l {
+      width: 10%;
 
-    h1 {
-      display: flex;
-      justify-content: center;
+      h1 {
+        display: flex;
+        justify-content: center;
+      }
+
+      img {
+        margin: 0 60px;
+        width: 50px;
+        height: 50px;
+      }
     }
 
-    img {
-      margin: 0 60px;
-      width: 50px;
-      height: 50px;
+
+    .c {
+      width: 80%;
+
+      ul {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+
+        li {
+          // width: 200px;
+          padding: 10px 55px;
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+      }
     }
-  }
 
+    .r {
+      min-width: 1024px;
 
-  .c {
-    width: 80%;
+      .el-icon {
+        font-size: 40px;
+      }
+      span {
+        padding-left: 20px;
+        font-size: 30px;
+      }
 
-    ul {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      font-size: 18px;
-
-      li {
-        // width: 200px;
-        padding: 10px 55px;
+      .el-menu-item {
         font-size: 20px;
         font-weight: bold;
       }
-
     }
   }
-
-  // .r {
-  //   display: flex;
-  //   input {
-  //     width: 214px;
-  //     height: 40px;
-  //     border: 1px solid #dedede;
-  //     border-radius: 20px 0 0 20px;
-  //     float: left;
-  //     box-sizing: border-box;
-  //     padding-left: 19px;
-  //     outline-style: none;
-  //   }
-  //   .search-btn {
-  //     width: 50px;
-  //     height: 40px;
-  //     background: #0a328e;
-  //     border-radius: 0px 20px 20px 0px;
-  //     text-align: center;
-  //     line-height: 44px;
-  //   }
-  // }
 }
 </style>

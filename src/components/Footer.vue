@@ -1,15 +1,15 @@
 <template>
   <div class="footer-b">
-    <div class="heart">
-      <div class="footer-i">
+    <el-row class="heart" :gutter="40" justify="space-between">
+      <el-col :md="8" :sm="8" :lg="8" class="footer-i hidden-xs-only">
         <h2 style="display:flex;justify-content: center;">
           <a href=""><img src="../assets/hospitallogo.png" alt="" width="60" height="60" /></a>
         </h2>
         <p style="line-height: 1.6em">
           广东省人民医院将始终坚持以习近平新时代中国特色社会主义思想为指导，深入贯彻落实党中央决策部署及省委工作安排，按照广东省卫生健康委工作要求，与时俱进深化“1+1+9”工作部署，以国际视野、战略高度、前瞻性规划和脚踏实地的精神，不断推进高水平医院建设，为争创全国卫生健康高质量发展示范省、建设健康中国贡献智慧和力量！
         </p>
-      </div>
-      <div class="footer-m">
+      </el-col>
+      <el-col :md="8" :sm="8" :lg="8" :xs="20" class="footer-m">
         <el-card shadow="hover" class="links" body-style="display:flex;flex-direction: column;">
           <p>友情链接</p>
           <div>
@@ -19,13 +19,13 @@
             </div>
           </div>
         </el-card>
-      </div>
-      <div class="footer-r">
+      </el-col>
+      <el-col :md="8" :sm="8" :lg="8" class="footer-r hidden-xs-only">
         <p>主办单位：广东省人民医院 (粤ICP备14099214号)</p>
         <p>地址：广州市中山二路106号</p>
         <h3>总机：（020）83827812</h3>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
   
@@ -84,15 +84,14 @@ export default {
 
   .heart {
     display: flex;
-    justify-content: space-between;
-    width: 1250px;
+    justify-content: center;
 
     .footer-i {
       padding-right: 32px;
 
       p {
         padding-top: 27px;
-        width: 426px;
+        // width: 426px;
         height: 55px;
         font-size: 12px;
         font-family: Microsoft YaHei;
@@ -101,41 +100,6 @@ export default {
       }
     }
 
-    //   ul {
-    //     margin-top: 123px;
-    //     width: 293px;
-    //     display: flex;
-    //     justify-content: space-between;
-    //     li {
-    //       border-right: 1px solid #9e9e9e;
-    //       height: 20px;
-    //       position: relative;
-    //       text-align: center;
-    //       img {
-    //         position: absolute;
-    //         left: -20%;
-    //         top: -110px;
-    //         display: none;
-    //       }
-    //       &:hover {
-    //         img {
-    //           display: block;
-    //         }
-    //       }
-    //       a {
-    //         height: 19px;
-    //         font-size: 16px;
-    //         font-family: Microsoft YaHei;
-    //         font-weight: 400;
-    //         color: #7d879a;
-    //         padding-right: 16px;
-    //         text-decoration: none;
-    //       }
-    //       &:last-child {
-    //         border-right: 0;
-    //       }
-    //     }
-    //   }
     .footer-r {
       padding-left: 32px;
       display: flex;
@@ -143,7 +107,7 @@ export default {
       justify-content: space-evenly;
 
       p {
-        width: 400px;
+        // width: 400px;
         height: 14px;
         font-size: 14px;
         font-family: Microsoft YaHei;

@@ -7,11 +7,12 @@
 }
 
 body {
+  width: 100%;
   overflow-x: hidden;
+  min-width: 1024px;
 }
 
 #app {
-  min-width: 100%;
   margin: 0 auto;
   /* padding: 2rem 0; */
 

@@ -7,7 +7,7 @@
             <h3>科室介绍</h3>
         </div>
         <el-row :gutter="20">
-            <el-col v-for="sections in section.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
+            <el-col :xs="12" :sm="12" :md="12" :lg="6" v-for="sections in section.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
                 :key="sections._id" :span="6">
                 <el-card body-style="background-color:  #F0F2F5;height: 450px">
                     <template #header>

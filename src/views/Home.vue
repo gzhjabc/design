@@ -1,10 +1,15 @@
 <template>
     <div class="home">
-        <el-carousel :interval="4000" style="width:1000px;margin:20px auto" height="400px">
-            <el-carousel-item v-for="item in banner" :key="item._id">
-                <img :src="item.img" alt="" width="1000" height="400">
-            </el-carousel-item>
-        </el-carousel>
+        <el-row>
+            <el-col :xs="14">
+                 <el-carousel :interval="4000" style="width:1000px;margin:20px auto" height="400px">
+                    <el-carousel-item v-for="item in banner" :key="item._id">
+                        <img :src="item.img" alt="" width="1000" height="400">
+                    </el-carousel-item>
+                </el-carousel>
+            </el-col>
+        </el-row>
+       
         <el-card>
             <div class="card-title">
                 <el-icon>

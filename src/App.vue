@@ -38,27 +38,28 @@ export default {
 
 <template>
   <div>
-    <!-- 顶部 -->
-    <Tabbar></Tabbar>
-    <!-- 头部以及导航栏 -->
-    <Header></Header>
-    <!-- <header>
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-
-        <nav>
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-        </nav>
-      </div>
-    </header> -->
-  <!-- npm init vue@latest -->
-    <!-- 渲染视图组件 -->
-    <RouterView />
-    <!-- 尾部 -->
-    <Footer></Footer>
+    <el-container>
+      <!-- 顶部 -->
+          <el-header class="hidden-xs-only" height="150px">
+          <Tabbar></Tabbar>
+          <!-- 头部以及导航栏 -->
+          <Header></Header>
+          </el-header>
+          <el-header class="hidden-sm-and-up" height="420px">
+          <Tabbar></Tabbar>
+          <!-- 头部以及导航栏 -->
+          <Header></Header>
+          </el-header>
+          <!-- npm init vue@latest -->
+          <!-- 渲染视图组件 -->
+          <el-main>
+            <RouterView />
+          </el-main>
+          <!-- 尾部 -->
+          <el-footer>
+            <Footer></Footer>
+          </el-footer>
+    </el-container>
     <!-- 回到顶部 -->
     <el-backtop :right="20" :bottom="40" />
     <!-- <div class="links">
@@ -72,6 +73,18 @@ export default {
 </template>
 
 <style lang="less" scoped>
+
+.el-header {
+  padding: 0;
+}
+
+.el-main {
+  padding: 0;
+}
+
+.el-footer {
+  padding: 0;
+}
 
 .links a {
   display: inline-block;
