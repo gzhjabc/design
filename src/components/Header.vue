@@ -30,12 +30,12 @@
                 </el-icon>
                 <span>菜单</span>
               </template>
-                <el-menu-item index="/home">首页</el-menu-item>
-                <el-menu-item index="/section">科室</el-menu-item>
-                <el-menu-item index="/disease">疾病</el-menu-item>
-                <el-menu-item index="/expert">专家</el-menu-item>
-                <el-menu-item index="/technique">技术</el-menu-item>
-                <el-menu-item index="/article">文章</el-menu-item>
+              <el-menu-item index="/home">首页</el-menu-item>
+              <el-menu-item index="/section">科室</el-menu-item>
+              <el-menu-item index="/disease">疾病</el-menu-item>
+              <el-menu-item index="/expert">专家</el-menu-item>
+              <el-menu-item index="/technique">技术</el-menu-item>
+              <el-menu-item index="/article">文章</el-menu-item>
             </el-sub-menu>
           </el-menu>
         </el-col>
@@ -56,12 +56,12 @@ export default {
     handleOpen(index, indexPath) {
       console.log(index, indexPath);
       this.isMenuOpen = true;
-      this.$emit('handleHeaderHeight',this.isMenuOpen)
+      this.$emit('handleHeaderHeight', this.isMenuOpen)
     },
     handleClose(index, indexPath) {
       console.log(index, indexPath);
       this.isMenuOpen = false;
-      this.$emit('handleHeaderHeight',this.isMenuOpen)
+      this.$emit('handleHeaderHeight', this.isMenuOpen)
     }
   }
   // created () {
@@ -86,6 +86,7 @@ export default {
 <style lang="less" scoped>
 .nav {
   padding: 2% 0;
+
   .nav-wrap {
     // height: 118px;
     display: flex;
@@ -133,6 +134,7 @@ export default {
       .el-icon {
         font-size: 40px;
       }
+
       span {
         padding-left: 20px;
         font-size: 30px;

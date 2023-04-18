@@ -1,7 +1,7 @@
 <template>
     <div class="header">
-            <div class="header-wrap">
-                <el-row>
+        <div class="header-wrap">
+            <el-row>
                 <el-col :span="12">
                     <div class="l">
                         欢迎来到人民医院
@@ -31,10 +31,10 @@
                             </a>
                         </el-col>
                     </el-row>
-                </el-col>    
-                </el-row>
-            </div>
-</div>
+                </el-col>
+            </el-row>
+        </div>
+    </div>
 </template>
 
 <script>
