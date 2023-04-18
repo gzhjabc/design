@@ -30,9 +30,20 @@ export default {
 
   data() {
     return {
-      links: []
+      links: [],
+      isMenuOpen: false
     }
   },
+  methods: {
+    handleHeaderHeight(value) {
+      this.isMenuOpen = value
+    }
+  },
+  computed: {
+    headerHeight() {
+      return this.isMenuOpen? '420px': '150px';
+    }
+  }
 }
 </script>
 
@@ -45,10 +56,10 @@ export default {
           <!-- 头部以及导航栏 -->
           <Header></Header>
           </el-header>
-          <el-header class="hidden-sm-and-up" height="420px">
+          <el-header class="hidden-sm-and-up" :height="headerHeight">
           <Tabbar></Tabbar>
           <!-- 头部以及导航栏 -->
-          <Header></Header>
+          <Header @handleHeaderHeight="handleHeaderHeight"></Header>
           </el-header>
           <!-- npm init vue@latest -->
           <!-- 渲染视图组件 -->

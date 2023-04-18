@@ -49,14 +49,19 @@
 export default {
   data() {
     return {
+      isMenuOpen: false
     };
   },
   methods: {
     handleOpen(index, indexPath) {
       console.log(index, indexPath);
+      this.isMenuOpen = true;
+      this.$emit('handleHeaderHeight',this.isMenuOpen)
     },
     handleClose(index, indexPath) {
       console.log(index, indexPath);
+      this.isMenuOpen = false;
+      this.$emit('handleHeaderHeight',this.isMenuOpen)
     }
   }
   // created () {
