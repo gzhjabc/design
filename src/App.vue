@@ -67,7 +67,7 @@ export default {
         <RouterView />
       </el-main>
       <!-- 尾部 -->
-      <el-footer>
+      <el-footer height="320px">
         <Footer></Footer>
       </el-footer>
     </el-container>

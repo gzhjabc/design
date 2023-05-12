@@ -15,12 +15,13 @@
 			</el-form-item>
 		</el-form>
 		<div v-if="(stepActive==1)">
-			<el-result icon="success" title="查询结果：">
+			<el-result icon="success" title="查询结果：" sub-title="预约通过后，无法取消预约">
 				<template #extra>
 					<el-table :data="reserve" border stripe  style="width: 100%">
 						<el-table-column prop="name" label="姓名" width="100" align="center" header-align="center" />
 						<el-table-column prop="sex" label="性别" width="100" align="center" header-align="center" />
 						<el-table-column prop="section" label="科室" width="100" align="center" header-align="center" />
+						<el-table-column prop="expert" label="专家" width="100" align="center" header-align="center" />
 						<el-table-column label="预约时间" width="120" align="center" header-align="center">
 							<template #default="scope">
 								<div>
@@ -30,6 +31,16 @@
 						</el-table-column>
 						<el-table-column prop="phone" label="手机号码" width="120" align="center" header-align="center" />
 						<el-table-column prop="desc" label="症状描述" align="center" header-align="center" width="300" />
+						<el-table-column prop="success" label="是否通过预约" width="120" align="center" header-align="center" />
+						<el-table-column prop="success" label="操作" width="120" align="center" header-align="center">
+							<template #default="scope">
+								<el-popconfirm title="确定取消预约吗？" confirm-button-text="确定" cancel-button-text="取消" width="200" @confirm="deleteRow(scope.row, scope.$index)">
+									<template #reference>
+										<el-button :disabled="scope.row.success=='是'? true : false" plain type="danger" size="small">取消预约</el-button>
+									</template>
+								</el-popconfirm>
+							</template>
+						</el-table-column>
 					</el-table>
 					<el-button style="margin-top:20px;" type="primary" @click="goIndex">前往首页</el-button>
 				</template>
@@ -50,6 +61,8 @@
                 stepActive: 0,
 				// 要查询的信息
                 reserve: [],
+				// 预约次数
+				count: 0,
 				// 登录信息
                 login: {
                     username: "",
@@ -94,9 +107,37 @@
 						}).get()
 						this.reserve = res.data
 						console.log(res)
+						let res2 = await cloud.database().collection('admins').where({
+							_id: id
+						}).get()
+						console.log(res2)
+						this.count = res2.data[0].count
 					}else{
 						this.$message.warning(admin.message)
 					}
+			},
+			// 删除该行
+			async deleteRow(row, index){
+				console.log('row', row)
+				var reqData = {_id: row._id}
+				
+				var res = await cloud.invoke('query-del', reqData)
+
+				if(res.code == 200){
+					this.reserve.splice(index,1)
+					this.$message.success("取消预约成功")
+					// 取消预约成功后增加一次预约次数
+					this.count += 1;
+					let id = localStorage.getItem("postId")
+					let res2 = await cloud.database().collection('admins').where({
+						_id: id
+					}).update({
+						count: this.count
+					})
+					console.log(res2)
+				}else{
+					this.$alert(res.message, "提示", {type: 'error'})
+				}
 			},
 			// 返回首页
 			goIndex(){

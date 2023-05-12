@@ -29,10 +29,24 @@
 				<div class="el-form-item-msg">选择自己的性别</div>
 			</el-form-item>
 			<el-form-item label="科室选择" prop="section">
-				<el-select v-model="form.section" placeholder="请选择科室">
+				<el-select v-model="form.section" placeholder="请选择科室" @change="sectionSelect">
 					<el-option :label="item.name" v-for="item in section" :key="item._id" :value="item.name"></el-option>
 				</el-select>
-				<div class="el-form-item-msg">根据自己的疾病选择对于对应的科室</div>
+				<div class="el-form-item-msg">根据自己的疾病选择对应的科室</div>
+			</el-form-item>
+			<el-form-item label="专家选择" prop="expert">
+				<el-select v-model="form.expert" placeholder="请选择专家" @change="expertSelect">
+					<el-option :label="item.name" v-for="item in expert" :key="item._id" :value="item.name"></el-option>
+				</el-select>
+				<div class="expert-show" v-if="isExpert">
+					<el-image style="width: 100px; height: 120px" fit="fill" :src="isExpertSelect.img" />
+					<el-card style="width: 75%;font-size: 12px;text-indent: 20px;height: 120px">
+						<el-scrollbar height="120px">
+							<div v-html="isExpertSelect.content"></div>
+						</el-scrollbar>
+					</el-card>
+				</div>
+				<div class="el-form-item-msg">根据选择的科室选择对应的专家</div>
 			</el-form-item>
 			<el-form-item label="日期选择" prop="date">
 				<el-date-picker type="date" value-format="YYYY-MM-DD" placeholder="选择日期"
@@ -47,6 +61,10 @@
 				<el-input type="textarea" v-model="form.desc" placeholder="请输入自己的病症情况"></el-input>
 				<div class="el-form-item-msg">根据症状来快速判断何种疾病</div>
 			</el-form-item>
+			<div class="el-form-item-msg" style="text-align: center">当前还剩预约次数：{{ count }}次</div>
+			<div style="margin-top: 20px;display: flex;justify-content: center;">
+				<el-button @click="pay">点击支付</el-button>
+			</div>
 		</el-form>
 		<div v-if="(stepActive == 2)">
 			<el-result icon="success" title="预约成功" sub-title="请等待来电结果">
@@ -58,13 +76,27 @@
 		<el-form style="text-align: center;">
 			<el-button v-if="stepActive > 0 && stepActive < 2" @click="pre">上一步</el-button>
 			<el-button v-if="stepActive < 1" type="primary" @click="next">下一步</el-button>
-			<el-button v-if="(stepActive == 1)" type="primary" @click="save">提交</el-button>
+			<el-popover
+			v-if="(count == 0)"
+			placement="top-start"
+			:width="200"
+			trigger="hover"
+			content="当前没有预约次数了，请等明天或取消预约以增加次数"
+			>
+			<template #reference>
+				<span style="margin-left: 20px;">
+					<el-button v-if="(stepActive == 1)" :disabled="(count == 0)" type="primary" @click="save">提交</el-button>
+				</span>
+			</template>
+		</el-popover>
+		<el-button v-if="(stepActive == 1 && count != 0)" :disabled="(count == 0 || isPay == false)" type="primary" @click="save">提交</el-button>
 		</el-form>
 	</div>
 </template>
 <script>
 import md5 from 'js-md5'
 import { cloud } from '@/utils/laf-cloud'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
 	data() {
 		return {
@@ -72,14 +104,26 @@ export default {
 			stepActive: 0,
 			// 科室的信息
 			section: [],
+			// 专家的信息
+			expert: [],
+			// 预约次数
+			count: 0,
+			// 选择的专家
+			isExpertSelect: [],
+			// 是否选择了专家
+			isExpert: false,
+			// 是否支付
+			isPay: false,
 			// 要上传的数据
 			form: {
 				name: "",
 				sex: "",
 				section: "",
+				expert: "",
 				date: "",
 				phone: "",
-				desc: ""
+				desc: "",
+				success: "否"
 			},
 			// 登录信息
 			login: {
@@ -96,6 +140,9 @@ export default {
 				],
 				section: [
 					{ required: true, message: '请选择科室', trigger: 'blur' }
+				],
+				expert: [
+					{ required: true, message: '请选择专家', trigger: 'blur' }
 				],
 				date: [
 					{ required: true, message: '请选择日期', trigger: 'blur' }
@@ -116,7 +163,7 @@ export default {
 				password: [
 					{ required: true, message: '请输入密码', trigger: 'blur' }
 				]
-			}
+			},
 		}
 	},
 	async created() {
@@ -129,6 +176,8 @@ export default {
 		let section = await collection.get()
 		console.log(section)
 		this.section = section.data
+
+		
 	},
 	// 离开路由前删除本地存储
 	beforeRouteLeave() {
@@ -160,6 +209,12 @@ export default {
 			if (admin.code == 200) {
 				this.stepActive += 1;
 				localStorage.setItem("postId", admin.data.userInfo.userId)
+				let id = localStorage.getItem("postId")
+				let res = await cloud.database().collection('admins').where({
+					_id: id
+				}).get()
+				console.log(res)
+				this.count = res.data[0].count
 			} else {
 				this.$message.warning(admin.message)
 			}
@@ -176,24 +231,106 @@ export default {
 				name: this.form.name,
 				sex: this.form.sex,
 				section: this.form.section,
+				expert: this.form.expert,
 				date: this.form.date,
 				phone: this.form.phone,
 				desc: this.form.desc,
-				postid: localStorage.getItem("postId")
+				postid: localStorage.getItem("postId"),
+				success: this.form.success
 			}
 
 			let user = await cloud.invoke('reserve', data)
 			console.log(user)
 			if (user.code == 200) {
 				this.stepActive = 2
+				this.count -= 1;
+			let id = localStorage.getItem("postId")
+			let res = await cloud.database().collection('admins').where({
+				_id: id
+			}).update({
+				count: this.count
+			})
+			console.log(res)
 			} else {
 				this.$message.warning(user.message)
 			}
+		},
+		// 获取选择科室的值
+		async sectionSelect(val) {
+			console.log("val",val);
+
+			console.log(cloud)
+			let db = cloud.database()
+
+			let collection = db.collection('expert')
+			// 跟据科室选择专家的信息
+			let expert = await collection.where({
+				section: val
+			}).get()
+			console.log(expert)
+			this.expert = expert.data
+			// 清空专家的值
+			delete this.form.expert
+
+			// 将值变为负，使专家信息隐藏
+			this.isExpert = false
+		},
+		// 获取选择专家的值
+		async expertSelect(val) {
+			console.log("val",val);
+
+			console.log(cloud)
+			let db = cloud.database()
+
+			let collection = db.collection('expert')
+			// 跟据科室选择专家的信息
+			let expert = await collection.where({
+				name: val
+			}).get()
+			console.log(expert)
+			this.isExpertSelect = expert.data[0]
+
+			// 将值变为正，使专家信息展示出来
+			this.isExpert = true
 		},
 		// 回到首页
 		goIndex() {
 			this.$router.push({
 				path: '/home'
+			})
+		},
+		// 支付提示
+		pay() {
+			ElMessageBox.confirm(
+				'本次预约费用为120元（人民币）',
+				'支付窗口（此为模拟支付）',
+				{
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'success',
+				callback: (action) => {
+					if (action === 'confirm'){
+						this.isPay = true,
+						this.$message.success('支付成功')
+					}
+					else {
+						this.isPay = false
+						this.$message.info('支付取消')
+					}
+				}
+				}
+			)
+			.then(() => {
+			ElMessage({
+				type: 'success',
+				message: '支付成功',
+			})
+			})
+			.catch(() => {
+			ElMessage({
+				type: 'info',
+				message: '支付取消',
+			})
 			})
 		}
 	}
@@ -214,6 +351,11 @@ export default {
 	width: 100%;
 }
 
+.expert-show {
+	margin-top: 20px;
+	display: flex;
+    justify-content: space-between;
+}
 .el-menu {
 	border: none !important;
 }
